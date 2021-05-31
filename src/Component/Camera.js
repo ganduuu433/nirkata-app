@@ -13,6 +13,7 @@ function Camera() {
       <div className="tab-pane fade show active" id="nav-camera" role="tabpanel">
         {/* Disini Codingan Camera  */}
         <Webcam
+          audio={false}
           muted={true} 
           style={{
             marginLeft: "auto",
@@ -23,8 +24,22 @@ function Camera() {
             zindex: 9,
             width: "100%",
             height: "inherit",
+            marginBottom: "-6px"
           }}
         />
+        <div className="signDetection">
+          <ul>
+            <li id="sign"><h5>sign</h5></li>
+            <li id="signResult"><h5><strong>A</strong></h5></li>
+            <li>   
+            </li>
+            <button type="button" className="signButton">
+                <img src="img/pencil-icon.png"></img>
+              </button>
+          </ul>
+          
+        </div>
+        
       </div>
     </div>
   </div>

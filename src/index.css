@@ -59,3 +59,55 @@ textarea.form-control{
     width: 100%;
     text-align: center;
   }
+
+  textarea.form-control {
+    min-height: calc(15.5em + .75rem + 2px);
+}
+
+.signDetection{
+  padding: 0.3rem;
+  background: rgb(255 255 255 / 80%);
+  border-radius: 30px;
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+}
+
+.signDetection ul li{
+  
+  display: inline-block;
+  text-decoration: none;
+}
+
+.signDetection ul{
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+
+.signButton{
+  width: 3rem;
+  height: 3rem;
+  border-radius: 25px;
+  background: #0AD411;
+  border: none;
+}
+
+.signButton img{
+  width: 1.8rem;
+}
+
+.tab-pane{
+  position: relative;
+}
+
+#sign{
+  margin-right: 1rem;
+  padding-left: 0.4rem;
+}
+
+#signResult{
+  margin-right: 1rem;
+}
