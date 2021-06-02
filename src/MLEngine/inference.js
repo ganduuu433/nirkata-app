@@ -1,4 +1,3 @@
-import Webcam from './webcam.js'
 import * as tf from '@tensorflow/tfjs'
 
 const predictionMap = {
@@ -40,13 +39,11 @@ async function initModel() {
     const fps = 5;
     const fpsInterval = 1000 / fps; 
     
-    const webcam = new Webcam(document.getElementById('webcam'));
-    
     const mobilenet = await loadMobilenet();
-    const modelURL = './MLEngine/mobilenet-ae-20/my_model.json'
+    const modelURL = './mobilenet-ae-20/my_model.json'
     const model = await tf.loadLayersModel(modelURL);
 
-    return {webcam, mobilenet, model}
+    return {mobilenet, model}
 }
 
 export {predict, initModel};

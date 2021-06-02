@@ -1,6 +1,9 @@
 import Webcam from "react-webcam";
 import React, {useState, useEffect} from 'react';
+import WebcamTF from '../MLEngine/webcam.js';
 import {predict, initModel} from '../MLEngine/inference.js'
+
+let webcam;
 
 function Camera() {
   const [pred, setPred] = useState("");
@@ -11,7 +14,8 @@ function Camera() {
   };
 
   const initInference = async () => {
-    const {webcam, mobilenet, model} = initModel();
+    const {mobilenet, model} = initModel();
+    webcam = new WebcamTF(document.getElementById('webcam'));
     await webcam.setup();
     // setInterval(
     //   () => showPrediction(),

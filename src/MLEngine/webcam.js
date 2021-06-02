@@ -113,4 +113,4 @@ class Webcam {
   }
 }
 
-export default Webcam
+export default Webcam;
