@@ -1,5 +1,8 @@
 import * as tf from '@tensorflow/tfjs'
 
+let mobilenet;
+let model;
+
 const predictionMap = {
     0: 'A',
     1: 'B',

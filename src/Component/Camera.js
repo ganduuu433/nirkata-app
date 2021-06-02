@@ -45,6 +45,7 @@ function Camera() {
           id="webcam"
           audio={false}
           muted={true} 
+          screenshotFormat="image/jpeg"
           style={{
             marginLeft: "auto",
             marginRight: "auto",
