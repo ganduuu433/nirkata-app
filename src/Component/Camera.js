@@ -1,5 +1,5 @@
 import Webcam from "react-webcam";
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Component} from 'react';
 import WebcamTF from '../MLEngine/webcam.js';
 import * as tf from '@tensorflow/tfjs'
 
@@ -51,7 +51,9 @@ const initModel = async () => {
   model = await tf.loadLayersModel(modelURL);
 }
 
-function Camera() {
+
+
+function Camera(props) {
   const [pred, setPred] = useState("");
 
   const showPrediction = async () => {
@@ -73,6 +75,8 @@ function Camera() {
     () => {initInference();},
     []
   );
+
+  // console.log(props.parentCallback)
 
   return (
     <div>
@@ -107,7 +111,7 @@ function Camera() {
             <li id="signResult"><h5><strong>{pred}</strong></h5></li>
             <li>   
             </li>
-            <button type="button" className="signButton">
+            <button type="button" className="signButton" onClick={() => props.parentCallback(pred) } > 
                 <img src="img/pencil-icon.png"></img>
               </button>
           </ul>  
