@@ -55,6 +55,7 @@ const initModel = async () => {
 
 function Camera(props) {
   const [pred, setPred] = useState("");
+  const [state, setState] = useState("")
 
   const showPrediction = async () => {
     let pred = await predict();
@@ -70,6 +71,32 @@ function Camera(props) {
       200
     );
   };
+
+  var isKeyPressed = {
+    'a': false, // ASCII code for 'a'
+ // ... Other keys to check for custom key combinations
+};
+
+  document.onkeydown = (keyDownEvent) => {
+  
+    keyDownEvent.preventDefault();
+    isKeyPressed[keyDownEvent.key] = true;
+     
+   if (isKeyPressed["c"]){
+      props.parentCallback(pred)
+
+   }
+    document.onkeyup = (keyUpEvent) => {
+  
+    keyUpEvent.preventDefault();
+     
+    isKeyPressed[keyDownEvent.key] = false;
+   };
+
+   };
+
+   
+   
 
   useEffect(
     () => {initInference();},
