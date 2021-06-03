@@ -18,7 +18,7 @@ function App() {
           </div> 
           <div className="col-md-6 col-nopadding">
             <Translate_Indonesia/>
-          </div> 
+          </div>
         </div>
       </div>
       <Footer/>
