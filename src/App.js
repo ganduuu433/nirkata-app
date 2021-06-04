@@ -34,10 +34,10 @@ handleCallback = (camText) =>{
             <Camera 
               parentCallback={this.handleCallback}
             />
-            {console.log(translateText)}
           </div> 
           <div className="col-md-6 col-nopadding">
             <Translate_Indonesia 
+                parentCallback={this.handleCallback}
                 translate = { translateText }
             />
           </div>
