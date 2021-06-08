@@ -7,6 +7,8 @@ import * as tf from '@tensorflow/tfjs'
 let webcam;
 let mobilenet;
 let model;
+const modelURL = './mobilenet-ay-proc4-25/model.json'
+
 const predictionMap = {
     0: 'A',
     1: 'B',
@@ -29,8 +31,9 @@ async function loadMobilenet() {
 async function predict() {
     const predictedClass = tf.tidy(() => {
         const img = webcam.capture();
-        const activation = mobilenet.predict(img);
-        const predictions = model.predict(activation);
+        // const activation = mobilenet.predict(img);
+        // const predictions = model.predict(activation);
+        const predictions = model.predict(img)
         return predictions.as1D().argMax();
     });
     let preds = await predictedClass.data();
@@ -46,8 +49,7 @@ const initModel = async () => {
   const fps = 5;
   const fpsInterval = 1000 / fps; 
   
-  mobilenet = await loadMobilenet();
-  const modelURL = './mobilenet-ae-20/my_model.json'
+  // mobilenet = await loadMobilenet();
   model = await tf.loadLayersModel(modelURL);
 }
 
