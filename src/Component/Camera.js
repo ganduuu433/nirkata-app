@@ -1,5 +1,5 @@
 import Webcam from "react-webcam";
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Component} from 'react';
 import WebcamTF from '../MLEngine/webcam.js';
 import * as tf from '@tensorflow/tfjs'
 
@@ -36,8 +36,9 @@ async function predict() {
     return predictionMap[classId]
 }
 
-function Camera() {
+function Camera(props) {
   const [pred, setPred] = useState("");
+  const [state, setState] = useState("")
 
   const showPrediction = async () => {
     let pred = await predict();
@@ -54,10 +55,38 @@ function Camera() {
     );
   };
 
+  var isKeyPressed = {
+    'a': false, // ASCII code for 'a'
+ // ... Other keys to check for custom key combinations
+};
+
+  document.onkeydown = (keyDownEvent) => {
+  
+    keyDownEvent.preventDefault();
+    isKeyPressed[keyDownEvent.key] = true;
+     
+   if (isKeyPressed["c"]){
+      props.parentCallback(pred)
+
+   }
+    document.onkeyup = (keyUpEvent) => {
+  
+    keyUpEvent.preventDefault();
+     
+    isKeyPressed[keyDownEvent.key] = false;
+   };
+
+   };
+
+   
+   
+
   useEffect(
     () => {initInference();},
     []
   );
+
+  // console.log(props.parentCallback)
 
   return (
     <div>
@@ -92,7 +121,7 @@ function Camera() {
             <li id="signResult"><h5><strong>{pred}</strong></h5></li>
             <li>   
             </li>
-            <button type="button" className="signButton">
+            <button type="button" className="signButton" onClick={() => props.parentCallback(pred) } > 
                 <img src="img/pencil-icon.png"></img>
               </button>
           </ul>  

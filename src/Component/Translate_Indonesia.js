@@ -1,4 +1,6 @@
-function Translate_Indonesia() {
+import React from 'react'
+
+function Translate_Indonesia(props){
   return (
     <div>
       <nav>
@@ -8,8 +10,8 @@ function Translate_Indonesia() {
       </nav>
       <div className="tab-content" id="nav-tabContent">
         <div className="tab-pane fade show active border-tab" id="nav-indonesia" role="tabpanel" aria-labelledby="nav-indonesia-tab">
-        <textarea className="form-control" id="exampleFormControlTextarea1" rows="3">
-          
+        <textarea value={ props.translate } className="form-control" id="exampleFormControlTextarea1" rows="3">
+            
           </textarea> {/* Disini Output Text  */}
         </div>
       </div>
