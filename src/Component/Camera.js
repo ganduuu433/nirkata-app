@@ -5,8 +5,9 @@ import * as tf from '@tensorflow/tfjs'
 
 
 let webcam;
-let mobilenet;
 let model;
+const modelURL = './mobilenet-ay-proc4-25/model.json'
+
 const predictionMap = {
     0: 'A',
     1: 'B',
@@ -19,18 +20,11 @@ const predictionMap = {
     8: 'W'
 };
 
-async function loadMobilenet() {
-    const mobilenet = await tf.loadLayersModel('https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_1.0_224/model.json');
-    const layer = mobilenet.getLayer('conv_pw_13_relu');
-    return tf.model({inputs: mobilenet.inputs, outputs: layer.output});
-}
-
 // predict function for react app
 async function predict() {
     const predictedClass = tf.tidy(() => {
         const img = webcam.capture();
-        const activation = mobilenet.predict(img);
-        const predictions = model.predict(activation);
+        const predictions = model.predict(img)
         return predictions.as1D().argMax();
     });
     let preds = await predictedClass.data();
@@ -42,17 +36,6 @@ async function predict() {
     return predictionMap[classId]
 }
 
-const initModel = async () => {
-  const fps = 5;
-  const fpsInterval = 1000 / fps; 
-  
-  mobilenet = await loadMobilenet();
-  const modelURL = './mobilenet-ae-20/my_model.json'
-  model = await tf.loadLayersModel(modelURL);
-}
-
-
-
 function Camera(props) {
   const [pred, setPred] = useState("");
   const [state, setState] = useState("")
@@ -63,7 +46,7 @@ function Camera(props) {
   };
 
   const initInference = async () => {
-    await initModel();
+    model = await tf.loadLayersModel(modelURL);
     webcam = new WebcamTF(document.getElementById('webcam'));
     await webcam.setup();
     setInterval(
